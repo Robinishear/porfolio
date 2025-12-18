@@ -108,7 +108,7 @@ export default function Page() {
 
               <div className="w-full lg:w-1/2 mt-10 lg:mt-0">
                 <img
-                  src="https://i.ibb.co.com/cXNstw9k/Nexa-Code-Studio-Flux.png"
+                  src="https://i.ibb.co.com/3ySnHjhQ/100.png"
                   className={`rounded-lg shadow-lg ${CYAN_GLOW}`}
                   alt="Stride Mockup"
                 />
@@ -117,17 +117,16 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ================= TRUST BAR ================= */}
+        {/* ================= TRUST BAR =================
         <section className="py-16 px-6 md:px-20">
           <div className="max-w-6xl mx-auto flex justify-center items-center space-x-12 opacity-80 border-t border-b border-cyan-500/10 py-4">
-            {/* Added subtle scale hover effect */}
-            <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
+            <img src="https://i.ibb.co.com/5xnLVVH0/Macbook-Air-localhost-3.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
             <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
             <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
             <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
             <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
           </div>
-        </section>
+        </section> */}
 
         {/* ================= TITLE SECTION ================= */}
         <section className="py-20 px-6 md:px-20 text-center">

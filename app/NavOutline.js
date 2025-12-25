@@ -48,6 +48,7 @@ const NavOutline = () => {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/About" },
+    { name: "Contact", href: "/Contact" },
     { name: "Services", href: "/Services" },
     { name: "My Projects", href: "/MyPortfolio" },
     { name: "Professional Profile", href: "/ProfessionalProfile" },

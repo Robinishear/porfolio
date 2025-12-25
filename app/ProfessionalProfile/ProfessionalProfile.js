@@ -56,7 +56,7 @@ const ProfessionalProfile = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-[15vw] leading-[0.75] font-black tracking-tighter uppercase italic mb-8"
             >
-              M'R <span className="text-outline-thin text-transparent">ROBIN</span>
+            M&apos;R<span className="text-outline-thin text-transparent">ROBIN</span>
             </motion.h1>
 
             <motion.p 

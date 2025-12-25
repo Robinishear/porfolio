@@ -1,30 +1,21 @@
-// File: app/CarGallery.jsx
 "use client";
 import Image from "next/image";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-// UI Icons
+// UI Icons - Fixed imports (Fa6 for new icons)
 import { RxArrowRight } from "react-icons/rx";
-import { FaGears, FaRoad, FaGaugeHigh } from "react-icons/fa";
+import { FaRoad } from "react-icons/fa"; 
+import { FaGears, FaGaugeHigh } from "react-icons/fa6"; // Moved to fa6
 
-// External components/data - Assuming these exist in the project structure
-// ধরে নেওয়া হচ্ছে Date হলো গাড়ির তথ্যের একটি অ্যারে (e.g., const Date = [...] export)
 import CarData from "./Date"; 
 import CarDetailsModal from "./CarDetailsModal";
 
-// --- আইকন ম্যাপিং (String থেকে Component এ রূপান্তর) ---
 const iconMap = {
   FaGears: <FaGears className="text-cyan-400" />,
   FaRoad: <FaRoad className="text-cyan-400" />,
   FaGaugeHigh: <FaGaugeHigh className="text-cyan-400" />,
 };
 
-// --- Utility Components: Car Card ---
-
-/**
- * Renders a single Car Card.
- */
 const CarCard = ({ car, onView }) => {
-  // Determine color based on price format (simple logic)
   const priceColor = car.price?.includes("Crore")
     ? "text-yellow-400"
     : "text-cyan-400";
@@ -32,15 +23,17 @@ const CarCard = ({ car, onView }) => {
   return (
     <article 
       className="group relative text-sm font-bold rounded-xl shadow-lg p-3 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 hover:border-cyan-500/80 hover:shadow-cyan-400/50 transition duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden cursor-pointer"
-      onClick={() => onView(car)} // Click anywhere on the card to open modal
+      onClick={() => onView(car)}
     >
-      {/* Image Container */}
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-xl">
-        <img
+      {/* Image Container - Fixed with Next.js Image component */}
+      <div className="aspect-[4/3] w-full relative overflow-hidden rounded-xl">
+        <Image
           src={car.image}
           alt={car.title || `Car ${car.id}`}
-          className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+          priority={false}
         />
       </div>
       
@@ -61,10 +54,9 @@ const CarCard = ({ car, onView }) => {
             {car.price}
           </span>
           
-          {/* View Details button to open the modal */}
           <button
             onClick={(e) => {
-              e.stopPropagation(); // Prevent card click from firing twice
+              e.stopPropagation();
               onView(car);
             }}
             className="ml-1 inline-flex items-center gap-1 px-4 py-2 bg-yellow-400 text-gray-900 font-bold rounded-full hover:bg-yellow-500 transition text-xs shadow-md shadow-yellow-700/50"
@@ -80,7 +72,6 @@ const CarCard = ({ car, onView }) => {
 // --- Utility Components: Pagination ---
 
 const Pagination = ({ currentPage, totalPages, goToPage }) => {
-  // Memoized function for creating page buttons
   const createButton = useCallback((label, pageNum, isActive, isDisabled) => (
     <button
       type="button"
@@ -97,7 +88,6 @@ const Pagination = ({ currentPage, totalPages, goToPage }) => {
     </button>
   ), [goToPage]);
 
-  // Memoized function to calculate visible page numbers
   const pageNumbers = useMemo(() => {
     const numbers = [];
     const maxVisiblePages = 5;
@@ -110,9 +100,7 @@ const Pagination = ({ currentPage, totalPages, goToPage }) => {
       return numbers;
     }
 
-    // Always include first page
     numbers.push(1);
-
     let start = Math.max(2, currentPage - half + 1);
     let end = Math.min(totalPages - 1, currentPage + half - 1);
 
@@ -123,19 +111,12 @@ const Pagination = ({ currentPage, totalPages, goToPage }) => {
     }
 
     if (start > 2) numbers.push("...");
-
     for (let i = start; i <= end; i++) {
       if (i > 1 && i < totalPages) numbers.push(i);
     }
-    
     if (end < totalPages - 1) numbers.push("...");
-
-    // Always include last page if not already included
-    if (totalPages > 1) {
-        numbers.push(totalPages);
-    }
+    if (totalPages > 1) numbers.push(totalPages);
     
-    // Filter duplicates
     return [...new Set(numbers)]; 
   }, [currentPage, totalPages]);
 
@@ -160,7 +141,6 @@ const Pagination = ({ currentPage, totalPages, goToPage }) => {
   );
 };
 
-
 // --- Utility Components: Skeleton Loader ---
 
 const CarSkeleton = () => (
@@ -183,46 +163,39 @@ const CarSkeleton = () => (
 // --- Main Component: CarGallery ---
 
 export default function CarGallery() {
-  // Prepare data: Replace string icon names with actual React components
   const cars = useMemo(() => {
-    // Ensure CarData is treated as an array and exists
     if (!Array.isArray(CarData)) return [];
       
     return CarData.map((car) => ({
       ...car,
       specs: car.specs.map((spec) => ({
         ...spec,
-        icon: iconMap[spec.icon] || null, // Fallback for missing icon
+        icon: iconMap[spec.icon] || null,
       })),
     }));
   }, []);
 
   const TOTAL_CARS = cars.length;
 
-  // State Management
   const [loading, setLoading] = useState(true);
   const [pageSize, setPageSize] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
-  const [modalCar, setModalCar] = useState(null); // Car object for the modal
+  const [modalCar, setModalCar] = useState(null);
 
   const totalPages = Math.ceil(TOTAL_CARS / pageSize);
   
-  // Effect for initial and page size change loading state
   useEffect(() => {
-    // Small delay to simulate data fetching/processing
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
   }, [pageSize]);
 
-  // Handle page change
   const goToPage = useCallback((n) => {
     const newPage = Math.min(Math.max(1, n), totalPages);
     if (newPage !== currentPage) {
       setCurrentPage(newPage);
       setLoading(true);
-      // Simulate loading delay for better UX and scroll to top
       setTimeout(() => {
         setLoading(false);
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -230,13 +203,11 @@ export default function CarGallery() {
     }
   }, [currentPage, totalPages]);
   
-  // Memoized list of cars to display on the current page
   const visibleCars = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     return cars.slice(startIndex, startIndex + pageSize);
   }, [cars, currentPage, pageSize]);
 
-  // Content to display: Skeletons or Car Cards
   const galleryContent = loading
     ? Array.from({ length: Math.min(pageSize, TOTAL_CARS) }).map((_, i) => (
         <CarSkeleton key={i} />
@@ -245,25 +216,22 @@ export default function CarGallery() {
         <CarCard key={car.id} car={car} onView={setModalCar} />
       ));
       
-  // Handle pageSize change and reset page
   const handlePageSizeChange = (e) => {
     const newSize = Number(e.target.value);
     setPageSize(newSize);
-    setCurrentPage(1); // Reset to first page
+    setCurrentPage(1);
     setLoading(true);
   };
 
   return (
     <div id="car-gallery" className="min-h-screen bg-gray-900 text-white p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
         <header className="text-center mb-10">
           <h1 className="text-4xl font-extrabold text-cyan-400 drop-shadow-lg [text-shadow:_0_0_10px_rgb(6_182_212_/_0.5)]">
             Exclusive Exotic Car Showroom
           </h1>
         </header>
 
-        {/* Page controls */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4 border-b border-gray-700 pb-4">
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-400 font-medium">Viewing:</span>
@@ -285,12 +253,10 @@ export default function CarGallery() {
           </div>
         </div>
 
-        {/* Gallery Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {galleryContent}
         </div>
 
-        {/* Pagination */}
         {!loading && totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
@@ -299,7 +265,6 @@ export default function CarGallery() {
           />
         )}
         
-        {/* Empty State */}
         {!loading && TOTAL_CARS === 0 && (
             <div className="text-center py-16 text-gray-500">
                 <p className="text-xl font-semibold">No cars available at the moment.</p>
@@ -307,12 +272,10 @@ export default function CarGallery() {
             </div>
         )}
 
-        {/* Footer */}
         <footer className="mt-12 text-center text-sm text-gray-500 border-t border-gray-800 pt-6">
           Total {TOTAL_CARS} vehicles available for immediate purchase.
         </footer>
 
-        {/* Scroll-to-top button */}
         <button
           aria-label="Scroll to top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -321,7 +284,6 @@ export default function CarGallery() {
           <RxArrowRight size={16} className="transform -rotate-90" />
         </button>
 
-        {/* Modal RENDER */}
         {modalCar && (
           <CarDetailsModal car={modalCar} onClose={() => setModalCar(null)} />
         )}

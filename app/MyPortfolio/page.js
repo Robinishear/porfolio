@@ -1,11 +1,11 @@
 import React from 'react';
-import MyPortfolio from './MyPortfolio';
+// import MyPortfolio from './MyPortfolio';
 
 
 const page = () => {
     return (
         <div>
-       <MyPortfolio />
+       {/* <MyPortfolio /> */}
         </div>
     );
 };

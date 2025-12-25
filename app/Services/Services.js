@@ -1,257 +1,165 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, { useRef } from "react";
 import Link from "next/link";
 import {
-  FaTerminal, 
-  FaLayerGroup, 
-  FaCubes, 
-  FaCodeBranch,
-  FaFileImage,
-  FaTabletAlt,
-  FaDatabase,       
-  FaChartLine,      
-  FaServer,         
-  FaPalette,        
-  FaMobileAlt,      
-  FaInfinity,       
+  FaTerminal, FaLayerGroup, FaDatabase, FaCubes, FaMobileAlt,
+  FaFileImage, FaServer, FaChartLine, FaArrowRight, FaGem
 } from "react-icons/fa";
 
-// Expanded services array with 12 items
 const services = [
-  {
-    icon: <FaTerminal />,
-    title: "MERN Stack Development",
-    description:
-      "Full-stack web application development using MongoDB, Express, ReactJS, and Node.js to build powerful, scalable digital products.",
-    highlight: true, // Main focus
-  },
-  {
-    icon: <FaLayerGroup />,
-    title: "Modern Front-End Development",
-    description:
-      "Expertise in crafting engaging, dynamic user interfaces (UIs) using React, Next.js, and advanced CSS frameworks like Tailwind CSS.",
-    highlight: false,
-  },
-  {
-    icon: <FaCubes />,
-    title: "Scalable Web Architecture",
-    description:
-      "Designing robust, full-featured web applications with a focus on clean, maintainable code and optimal performance.",
-    highlight: false,
-  },
-  {
-    icon: <FaDatabase />,
-    title: "Backend & API Development",
-    description:
-      "Creating secure, high-performance RESTful APIs and managing complex database structures with MongoDB/PostgreSQL.",
-    highlight: false,
-  },
-  {
-    icon: <FaMobileAlt />,
-    title: "Progressive Web Apps (PWA)",
-    description:
-      "Building mobile-first PWAs that offer fast, reliable, and engaging experiences across all devices, even offline.",
-    highlight: false,
-  },
-  {
-    icon: <FaFileImage />,
-    title: "Figma to Responsive HTML",
-    description:
-      "Pixel-perfect conversion of designs into clean, semantic, and fully responsive HTML/CSS/JS ensuring 100% design fidelity.",
-    highlight: false,
-  },
-  {
-    icon: <FaCodeBranch />,
-    title: "Web Performance Optimization",
-    description:
-      "Improving load times and user experience by optimizing assets, reducing render-blocking resources, and ensuring high Core Web Vitals.",
-    highlight: false,
-  },
-  {
-    icon: <FaTabletAlt />,
-    title: "Cross-Browser Compatibility",
-    description:
-      "Rigorous testing and implementation to ensure the website functions flawlessly and looks consistent across all major browsers.",
-    highlight: false,
-  },
-  {
-    icon: <FaChartLine />,
-    title: "Analytics Integration",
-    description:
-      "Integrating Google Analytics, Tag Manager, and custom tracking solutions to measure performance and user behavior accurately.",
-    highlight: false,
-  },
-  {
-    icon: <FaServer />,
-    title: "Deployment & DevOps (Basic)",
-    description:
-      "Setting up efficient CI/CD pipelines and deploying applications reliably using Vercel, Netlify, or AWS/Digital Ocean.",
-    highlight: false,
-  },
-  {
-    icon: <FaPalette />,
-    title: "UI/UX Consult & Prototyping",
-    description:
-      "Consulting on user interface best practices and creating interactive prototypes to visualize the final product flow.",
-    highlight: false,
-  },
-  {
-    icon: <FaInfinity />,
-    title: "Code Maintenance & Refactoring",
-    description:
-      "Reviewing and optimizing existing codebases to improve performance, maintainability, and future scalability.",
-    highlight: false,
-  },
+  { icon: <FaTerminal />, title: "MERN Mastery", desc: "Crafting robust full-stack applications with MongoDB, Express, React, and Node.", color: "#06b6d4" },
+  { icon: <FaLayerGroup />, title: "Next.js Elite", desc: "Blazing fast, SEO-optimized server-side rendered web experiences.", color: "#a855f7" },
+  { icon: <FaDatabase />, title: "Data Systems", desc: "Expert database architecture using PostgreSQL, Mongoose & SQL Server.", color: "#10b981" },
+  { icon: <FaCubes />, title: "Golang Backend", desc: "High-concurrency microservices and performance-driven backend logic.", color: "#3b82f6" },
+  { icon: <FaFileImage />, title: "Figma to Life", desc: "Converting complex designs into pixel-perfect, fluid-motion web interfaces.", color: "#ec4899" },
+  { icon: <FaMobileAlt />, title: "Hybrid Apps", desc: "Progressive Web Apps that look and feel native on every mobile device.", color: "#f59e0b" },
+  { icon: <FaServer />, title: "Cloud & DevOps", desc: "Seamless deployment with Docker, AWS, and CI/CD automation.", color: "#6366f1" },
+  { icon: <FaChartLine />, title: "Performance", desc: "Maximizing speed and Core Web Vitals for ultimate user retention.", color: "#ef4444" },
 ];
 
+// --- Magnetic & 3D Tilt Card Component ---
+const ServiceCard = ({ service, index }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-// --- Custom Component for Animated Card ---
-const AnimatedServiceCard = ({ service, index }) => {
-    const NEON_GRADIENT = "conic-gradient(transparent, #06b6d4, transparent, #ec4899, transparent, #06b6d4)";
-    const ContactButtonClass = "px-4 py-2 text-sm font-medium rounded-full text-cyan-400 bg-cyan-900/40 border border-cyan-500/50 hover:bg-cyan-800/60 transition-colors flex items-center gap-2";
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
 
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: index * 0.1 }} 
-            
-            // Outer Wrapper: Border Sweep and Hover Translate
-            className={`group relative p-px rounded-xl overflow-hidden transition-all duration-500 cursor-pointer shadow-2xl 
-                       ${
-                          service.highlight 
-                            ? "shadow-[0_0_25px_rgba(6,_182,_212,_0.8)] hover:animate-none hover:-translate-y-4" // Main card hover
-                            : "shadow-black/70 hover:-translate-y-2 hover:shadow-cyan-700/50"
-                       }`}
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
+      className="relative h-[320px] w-full rounded-[2.5rem] bg-gradient-to-br from-white/10 to-transparent border border-white/10 backdrop-blur-md group cursor-pointer"
+    >
+      <div 
+        style={{ transform: "translateZ(75px)", transformStyle: "preserve-3d" }}
+        className="absolute inset-0 flex flex-col p-8 justify-between"
+      >
+        {/* Animated Icon Icon */}
+        <div 
+          className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-2xl transition-all duration-500 group-hover:scale-110"
+          style={{ background: service.color, boxShadow: `0 0 30px ${service.color}44` }}
         >
-            {/* The Rotating Border Sweep Element */}
-            <div 
-                className={`absolute inset-0 transition-opacity duration-300 rounded-xl z-0 
-                            ${service.highlight ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                style={{ 
-                    backgroundImage: NEON_GRADIENT,
-                    animation: 'border-sweep 6s linear infinite',
-                    filter: 'blur(10px)', 
-                }}
-            ></div>
+          <div className="text-white drop-shadow-md">{service.icon}</div>
+        </div>
 
-            {/* Inner Content Box (Added conditional glitch effect) */}
-            <div className={`relative p-8 rounded-[11px] bg-[#1A1A1A] h-full 
-                             transition-all duration-300 hover:bg-[#202020] z-10 
-                             ${
-                                service.highlight 
-                                ? "border-2 border-cyan-500/80 group-hover:animate-glitch-shake-subtle" // 🟢 CHANGE 1: Glitch effect
-                                : "border border-gray-700/50"
-                             }`}>
-                
-                {/* Icon */}
-                <div className="text-4xl mb-4 text-cyan-400">
-                    {service.icon}
-                </div>
-                
-                {/* Title */}
-                <h3 className="text-xl font-semibold mb-2 text-white">
-                    {service.title}
-                </h3>
-                
-                {/* Description */}
-                <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                    {service.description}
-                </p>
-                
-                {/* Button */}
-                <Link href="/Contact">
-                    <button className={ContactButtonClass}>
-                        Start Project
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                    </button>
-                </Link>
-            </div>
-        </motion.div>
-    );
+        <div>
+          <h3 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+            {service.title}
+          </h3>
+          <p className="text-gray-400 text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+            {service.desc}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/40 group-hover:text-white transition-colors">
+          Discovery Session <FaArrowRight />
+        </div>
+      </div>
+
+      {/* Glow Effect */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-[2.5rem]"
+        style={{ background: `radial-gradient(circle at center, ${service.color}, transparent)` }}
+      />
+    </motion.div>
+  );
 };
 
-// --- Custom Component: Grid Background Layer ---
-// Creates a simple, reusable background grid pattern
-const GridBackground = () => (
-    // 🟢 CHANGE 2: Grid Background Layer
-    <div className="absolute inset-0 z-0">
-        <div 
-            className="w-full h-full bg-grid-white/[0.05] relative" 
-            style={{ 
-                // Custom CSS to create the tiny grid pattern
-                backgroundImage: 'linear-gradient(to right, #ffffff0d 1px, transparent 1px), linear-gradient(to bottom, #ffffff0d 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-                maskImage: 'radial-gradient(ellipse at 50% 50%, #000000 0%, transparent 80%)', // Fade out towards edges
-            }}
-        >
-            {/* Soft Cyan/Magenta Glow in the Center */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px]"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-500/10 rounded-full blur-[120px]"></div>
-        </div>
-    </div>
-);
-
-
-export default function WhatIDo() {
-  return (
-    // Main Container: Very dark background, added 'relative' for the absolute grid
-    <section className="relative min-h-screen flex justify-center items-center py-24 px-4 bg-[#0A0A0A] text-white overflow-hidden">
-      
-      <GridBackground />
+export default function PortfolioServices() {
+  return (
+    <section className="relative min-h-screen w-full bg-[#050505] py-32 px-6 overflow-hidden flex flex-col items-center">
       
-      <div className="max-w-7xl w-full relative z-10"> {/* Ensure content is above the grid */}
-        
-        {/* Title Section (Improved with Subtle Text Glow) */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-5xl font-extrabold text-gray-100 drop-shadow-lg [text-shadow:_0_0_15px_rgb(6_182_212_/_0.5)]">
-            What I <span className="text-cyan-400">Deliver</span>
-          </h2>
-          <p className="text-xl text-gray-400 mt-2">
-            A full spectrum of modern development capabilities.
-          </p>
-        </motion.div>
+      {/* --- BACKGROUND AURORA --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-cyan-600/20 rounded-full blur-[150px] animate-pulse delay-700" />
+      </div>
 
-        {/* Services Grid (Now 4x3 on large screens) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <AnimatedServiceCard key={index} service={service} index={index} />
-          ))}
-        </div>
+      {/* --- CONTENT --- */}
+      <div className="max-w-7xl w-full relative z-10">
         
-        {/* Call to Action */}
-        <motion.div
-            className="text-center mt-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+        {/* Heading Section */}
+        <div className="text-center mb-32">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+          >
+            <FaGem className="text-cyan-400 animate-spin-slow" />
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-400">Premium Solutions</span>
+          </motion.div>
+          
+          <h2 className="text-6xl md:text-9xl font-black text-white tracking-tighter leading-none mb-6">
+            MY <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">EXPERTISE.</span>
+          </h2>
+          <p className="text-gray-500 text-xl max-w-2xl mx-auto font-medium">
+            আমি শুধুমাত্র কোড লিখি না, আমি ডিজিটাল লিগ্যাসি তৈরি করি। প্রতিটি পিক্সেল এবং প্রতিটি লজিক নিখুঁতভাবে ডিজাইন করা।
+          </p>
+        </div>
+
+        {/* Services Grid with 3D Interaction */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
+          ))}
+        </div>
+
+        {/* Bottom Giant CTA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-40 text-center relative"
         >
-            <p className="text-gray-500 text-sm italic">
-                Ready to transform your idea into a digital reality?
-            </p>
-            <Link href="/Contact">
-                <button 
-                    className="mt-4 px-8 py-3 text-lg font-bold rounded-full 
-                               text-white bg-cyan-600 hover:bg-cyan-500 transition-all 
-                               shadow-[0_0_15px_rgba(6,_182,_212,_0.7)] hover:shadow-[0_0_25px_rgba(6,_182,_212,_1)]"
-                >
-                    Discuss Your Project Now
-                </button>
-            </Link>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200px] bg-cyan-500/10 blur-[120px] -z-10" />
+          <h3 className="text-5xl md:text-8xl font-black text-white/20 uppercase tracking-tighter mb-[-40px] md:mb-[-60px]">Ready to Scale?</h3>
+          <Link href="/Contact">
+            <motion.button
+              whileHover={{ scale: 1.05, letterSpacing: "2px" }}
+              whileTap={{ scale: 0.95 }}
+              className="relative px-16 py-8 bg-white text-black font-black text-2xl rounded-full shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:shadow-cyan-500/50 transition-all"
+            >
+              HIRE ME NOW
+            </motion.button>
+          </Link>
         </motion.div>
-      </div>
-    </section>
-  );
+      </div>
+
+      <style jsx global>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+      `}</style>
+    </section>
+  );
 }

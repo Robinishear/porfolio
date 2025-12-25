@@ -3,225 +3,146 @@
 import React from "react";
 import Head from "next/head";
 
+// --- Shimmer Card Component ---
 const AnimatedCard = ({ children }) => {
     return (
-        <div className="relative p-0.5 rounded-xl overflow-hidden bg-black transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:shadow-cyan-500/30">
-            {/* The Shimmering Border Layer */}
-            <div className="absolute inset-0 bg-border-gradient bg-[length:200%_auto] rounded-[11px] animate-shimmer opacity-50"></div>
+        <div className="relative p-[1px] rounded-2xl overflow-hidden bg-white/10 transition-all duration-500 hover:scale-[1.02]">
+            {/* Shimmering Border */}
+            <div className="absolute inset-0 bg-border-gradient bg-[length:200%_auto] animate-shimmer opacity-70"></div>
             
-            {/* The Content Layer */}
-            <div className="relative bg-[#1a1e3d] p-6 rounded-xl h-full shadow-lg">
+            {/* Content Container */}
+            <div className="relative bg-[#0b0e29] p-8 rounded-[15px] h-full">
                 {children}
             </div>
         </div>
     );
 };
 
-// --- Custom Component for Hover-Fill Button ---
-// Uses the 'wave-fill' concept to create a glowing overlay on hover
-const AnimatedButton = ({ children, className = '' }) => {
-    const DARK_BUTTON_GRADIENT = "bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950";
-    const FUCHSIA_COLOR = "bg-fuchsia-500/70";
-
+// --- Hover-Fill Button Component ---
+const AnimatedButton = ({ children, className = '', type = "button" }) => {
     return (
-        <button className={`group relative overflow-hidden text-lg rounded-full py-3 px-8 font-semibold text-white ${DARK_BUTTON_GRADIENT} transition-transform hover:scale-105 ${className}`}>
-            {/* Hover Fill Effect (Hidden by default) */}
-            <span className={`absolute inset-0 z-0 ${FUCHSIA_COLOR} origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100`}></span>
-            
-            {/* Text Layer (ensures text stays visible and slightly glows) */}
-            <span className="relative z-10 transition-colors duration-500 group-hover:text-white/90 group-hover:shadow-lg">
-                {children}
-            </span>
+        <button 
+            type={type}
+            className={`group relative overflow-hidden text-lg rounded-full py-4 px-10 font-bold text-white bg-white/5 border border-white/10 transition-all duration-300 hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] active:scale-95 ${className}`}
+        >
+            <span className="absolute inset-0 z-0 bg-gradient-to-r from-cyan-500 to-fuchsia-600 origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100"></span>
+            <span className="relative z-10">{children}</span>
         </button>
     );
 };
 
-
 export default function Page() {
-  // --- Theme Utility Classes for Consistency ---
-  const DUAL_GRADIENT_TEXT = "bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500";
-  const CYAN_GLOW = "shadow-[0_0_20px_rgba(6,182,212,0.8)]"; 
-  const FUCHSIA_GLOW = "shadow-[0_0_20px_rgba(236,72,153,0.8)]"; 
-
+  const DUAL_GRADIENT_TEXT = "bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-fuchsia-500";
+  const CYAN_GLOW = "shadow-[0_0_40px_rgba(6,182,212,0.2)]"; 
 
   return (
     <>
       <Head>
-        <title>NexaCode Studio Flux - AI-powered digital experiences</title>
+        <title>NexaCode Studio Flux | Next-Gen AI Experiences</title>
       </Head>
 
-      <div className="min-h-screen bg-[#050616] text-white font-sans">
+      <div className="min-h-screen bg-[#050616] text-white font-sans selection:bg-fuchsia-500/30">
+        
         {/* ================= HERO SECTION ================= */}
-        <section className="relative pt-32 pb-40 px-6 md:px-20 overflow-hidden">
-          {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0a38] via-[#0d0922] to-[#050616] opacity-90"></div>
+        <section className="relative pt-32 pb-48 px-6 overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent blur-3xl"></div>
+          
+          <div className="relative z-10 max-w-5xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-8 backdrop-blur-md animate-bounce">
+                <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+                <span className="text-sm font-medium text-cyan-200">AI-Powered Developer Platform v2.0</span>
+            </div>
 
-          {/* Top Small Banner (Subtle Pulse Motion) */}
-          <div className="relative z-10 text-center mb-6">
-            <span className={`bg-white/10 px-4 py-1 rounded-full text-sm ${DUAL_GRADIENT_TEXT} border border-cyan-500/30 animate-pulse duration-[4000ms]`}>
-              Introducing, the Agent Orchestration Platform for Marketing →
-            </span>
-          </div>
-
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-7xl font-extrabold leading-snug">
+            <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-[1.1] mb-8">
               AI-powered digital <br />
-              {/* 🟢 CHANGE 1: H1 Text with Subtle Glitch Animation */}
-              <span className={`${DUAL_GRADIENT_TEXT} inline-block animate-text-glitch`}>
-                experiences that
+              <span className={`${DUAL_GRADIENT_TEXT} animate-text-glitch`}>
+                experiences
               </span>
             </h1>
 
-            <p className="mt-6 text-lg md:text-xl text-gray-300">
-              Create content fast. Personalize with ease. Test, analyze,
-              <br />
-              and repeat. Then scale it all with AI and see what your team is
-              capable of.
-            </p>
+            <p className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed mb-10">
+Create stunning websites quickly, customize with precision, and elevate your brand using cutting-edge web development techniques.            </p>
 
-            {/* 🟢 CHANGE 2: Hero Button using AnimatedButton component */}
-            <AnimatedButton className="mt-8">
-              Start accelerating
-            </AnimatedButton>
-          </div>
-
-          {/* Big Circle Glow adjusted to Cyan/Fuchsia */}
-          <div className="absolute w-[900px] h-[900px] bg-gradient-to-t from-fuchsia-800/40 via-cyan-800/40 to-transparent rounded-full bottom-[-350px] left-1/2 -translate-x-1/2 blur-3xl"></div>
-        </section>
-
-        {/* ================= PRODUCT BANNER (STRIDE LIKE IMAGE) ================= */}
-        <section className="relative z-20 -mt-28 px-6 md:px-20">
-          <div className="max-w-6xl mx-auto bg-[#0e0f2a] rounded-2xl border border-cyan-500/20 shadow-2xl overflow-hidden">
-            <div className="p-4 md:p-10 flex flex-col lg:flex-row items-center justify-between">
-              <div className="w-full lg:w-1/2">
-                <h2 className="text-4xl font-bold mb-3">
-                  Set it. Sweat it. Send it.
-                </h2>
-                <p className="text-gray-300 mb-6">
-                  Let the streets, and the world know.
-                </p>
-                {/* 🟢 CHANGE 3: CTA Button using AnimatedButton component */}
-                <AnimatedButton>
-                  Get Started
-                </AnimatedButton>
-              </div>
-
-              <div className="w-full lg:w-1/2 mt-10 lg:mt-0">
-                <img
-                  src="https://i.ibb.co.com/jvYsYCRD/100-add-logo.png"
-                  className={`rounded-lg shadow-lg ${CYAN_GLOW}`}
-                  alt="Stride Mockup"
-                />
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <AnimatedButton>Start Accelerating</AnimatedButton>
+                <button className="px-8 py-4 rounded-full font-semibold border border-white/10 hover:bg-white/5 transition-colors">
+                    Watch Demo
+                </button>
             </div>
           </div>
         </section>
 
-        {/* ================= TRUST BAR =================
-        <section className="py-16 px-6 md:px-20">
-          <div className="max-w-6xl mx-auto flex justify-center items-center space-x-12 opacity-80 border-t border-b border-cyan-500/10 py-4">
-            <img src="https://i.ibb.co.com/5xnLVVH0/Macbook-Air-localhost-3.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
-            <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
-            <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
-            <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
-            <img src="https://i.ibb.co.com/jZ1bqHps/download-4.png" className="h-6 opacity-60 hover:opacity-100 transition duration-300 hover:scale-110" alt="Trust Bar Logo" />
-          </div>
-        </section> */}
-
-        {/* ================= TITLE SECTION ================= */}
-        <section className="py-20 px-6 md:px-20 text-center">
-          <h2 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-4xl mx-auto">
-            Everything you need to run <br /> marketing, all in{" "}
-            <span className={DUAL_GRADIENT_TEXT + " font-black"}>
-              One
-            </span>
-          </h2>
-          <p className="mt-4 text-gray-400 text-lg">
-            AI-powered and best-in-class (12x and counting)
-          </p>
-        </section>
-
-        {/* ================= AI SECTION ================= */}
-        <section className="py-32 px-6 md:px-20">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* LEFT TEXT */}
-            <div className="lg:pr-10">
-              <h3 className="text-5xl font-extrabold mb-6">
-                Did we mention AI?
-              </h3>
-              <p className="text-gray-300 text-lg mb-6 max-w-lg">
-                Meet Optimizely Opal: your infinite workforce powered by
-                specialized AI agents, always consistent with your brand,
-                connected across your workflows.
-              </p>
-
-              <button className={`font-medium ${DUAL_GRADIENT_TEXT} hover:opacity-80 transition duration-300`}>
-                Discover how to make your “wow” →
-              </button>
-            </div>
-
-            {/* 🟢 CHANGE 4: RIGHT CARDS using AnimatedCard component */}
-            <div className="grid grid-cols-2 gap-6">
-              <AnimatedCard>
-                <p className="text-gray-300 text-sm">Content creator agent</p>
-              </AnimatedCard>
-
-              <AnimatedCard>
-                <p className="text-gray-300 text-sm">Experiment ideas agent</p>
-              </AnimatedCard>
-
-              <AnimatedCard>
-                <p className="text-gray-300 text-sm">External comms agent</p>
-              </AnimatedCard>
-              
-               <AnimatedCard>
-                <p className="text-gray-300 text-sm">Deployment agent</p>
-              </AnimatedCard>
-            </div>
-          </div>
+        {/* ================= PRODUCT SHOWCASE ================= */}
+        <section className="relative z-20 -mt-20 px-6 max-w-7xl mx-auto">
+            <AnimatedCard>
+                <div className="flex flex-col lg:flex-row items-center gap-12">
+                    <div className="flex-1">
+                        <h2 className="text-4xl font-bold mb-4 italic uppercase">Set it. Work hard. Launch it.</h2>
+                        <p className="text-gray-400 text-lg mb-8">
+My system automatically handles the complex and time-consuming tasks, so you can focus entirely on your ideas and creative vision. Show me what you’re building.                        </p>
+                        <AnimatedButton className="text-sm py-3 px-6">Explore Features</AnimatedButton>
+                    </div>
+                    <div className="flex-1 relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <img
+                            src="https://i.ibb.co.com/zV4B3cSR/add.png"
+                            className={`relative rounded-lg w-full ${CYAN_GLOW}`}
+                            alt="Dashboard Preview"
+                        />
+                    </div>
+                </div>
+            </AnimatedCard>
         </section>
 
         {/* ================= CONTACT SECTION ================= */}
-        <section className="py-32 px-6 md:px-20">
+        <section className="py-40 px-6 relative">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-            {/* LEFT - Contact Info */}
-            <div className={`bg-[#0c1029] p-10 rounded-xl border border-cyan-500/20 shadow-xl transition-shadow hover:${FUCHSIA_GLOW}`}>
-              <h3 className="text-3xl font-bold mb-6">Get in touch</h3>
-              <p className="text-gray-300 mb-6">
-                But you probably have a ton of questions. How can this ingenious
-                solution supercharge your business?
+            <div>
+              <h2 className="text-5xl font-bold mb-6">
+            Let’s Build a Powerful & Extraordinary<br />
+                <span className="text-cyan-400"> Website Together</span>
+              </h2>
+              <p className="text-gray-400 text-lg mb-12">
+           If you have any questions or need more information, feel free to message me in the inbox. I’ll reply to you personally.
               </p>
-
-              <ul className="text-gray-300 space-y-4">
-                <li className="text-cyan-400">
-                  <span className="text-white">➤ Technical essentials to make everything work seamlessly</span>
-                </li>
-                <li className="text-cyan-400">
-                  <span className="text-white">➤ Tailored demos designed just for your unique needs</span>
-                </li>
-                <li className="text-cyan-400">
-                  <span className="text-white">➤ Pricing to suit your budget</span>
-                </li>
-              </ul>
+              
+              <div className="space-y-8">
+                <div className="flex items-center gap-6 group">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-2xl border border-white/10 group-hover:border-cyan-500/50 transition-colors">📍</div>
+                  <div><h4 className="font-bold text-xl text-white">Dhaka, Bangladesh</h4><p className="text-gray-500">Available Globally</p></div>
+                </div>
+                <div className="flex items-center gap-6 group">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-2xl border border-white/10 group-hover:border-fuchsia-500/50 transition-colors">📧</div>
+                  <div><h4 className="font-bold text-xl text-white">mdrobinahmed57898@gmail.com</h4><p className="text-gray-500">Fast Response</p></div>
+                </div>
+              </div>
             </div>
 
-            {/* RIGHT - Form */}
-            <div>
-              <h3 className="text-xl font-medium mb-4">
-                Just a few details first
-              </h3>
-              <form className="space-y-4">
-                <input
-                  type="email"
-                  placeholder="john.doe@optimizely.com"
-                  className="w-full bg-[#1d2247] text-white p-3 rounded border border-transparent focus:ring-1 focus:ring-cyan-500"
-                />
-
-                {/* 🟢 CHANGE 5: Form Button using AnimatedButton component */}
-                <AnimatedButton>
-                  Next
-                </AnimatedButton>
-              </form>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/10 to-fuchsia-500/10 blur-2xl rounded-[40px]"></div>
+              <div className="relative bg-white/5 backdrop-blur-3xl p-10 rounded-[32px] border border-white/10 shadow-2xl">
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase text-gray-400 ml-1">Name</label>
+                      <input type="text" className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-cyan-500/50 outline-none transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase text-gray-400 ml-1">Email</label>
+                      <input type="email" className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-cyan-500/50 outline-none transition-all" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase text-gray-400 ml-1">Message</label>
+                    <textarea rows="4" className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-cyan-500/50 outline-none transition-all"></textarea>
+                  </div>
+                  <AnimatedButton type="submit" className="w-full">Send Message</AnimatedButton>
+                </form>
+              </div>
             </div>
           </div>
         </section>

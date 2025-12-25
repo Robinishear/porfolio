@@ -1,9 +1,10 @@
 // File: app/CarGallery.jsx
 "use client";
+import Image from "next/image";
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 // UI Icons
 import { RxArrowRight } from "react-icons/rx";
-import { FaGears, FaRoad, FaGaugeHigh } from "react-icons/fa6";
+import { FaGears, FaRoad, FaGaugeHigh } from "react-icons/fa";
 
 // External components/data - Assuming these exist in the project structure
 // ধরে নেওয়া হচ্ছে Date হলো গাড়ির তথ্যের একটি অ্যারে (e.g., const Date = [...] export)

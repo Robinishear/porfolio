@@ -145,7 +145,7 @@ const ProfessionalProfile = () => {
 
             <div className="md:col-span-5 bg-cyan-600 p-12 rounded-[2.5rem] flex flex-col justify-between group cursor-pointer overflow-hidden relative">
                <div className="relative z-10">
-                 <h3 className="text-3xl font-black uppercase italic leading-none">Let's build <br/> something <br/> iconic.</h3>
+                 <h3 className="text-3xl font-black uppercase italic leading-none">Let&apos;s build <br/> something <br/> iconic.</h3>
                </div>
                <div className="relative z-10 mt-20 flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-widest">Start a project</span>

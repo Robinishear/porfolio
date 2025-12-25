@@ -108,7 +108,7 @@ export default function Page() {
 
               <div className="w-full lg:w-1/2 mt-10 lg:mt-0">
                 <img
-                  src="https://i.ibb.co.com/3ySnHjhQ/100.png"
+                  src="https://i.ibb.co.com/jvYsYCRD/100-add-logo.png"
                   className={`rounded-lg shadow-lg ${CYAN_GLOW}`}
                   alt="Stride Mockup"
                 />

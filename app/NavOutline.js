@@ -67,10 +67,9 @@ const socialLinks = [
           >
             <span className={logoContainerClass}> 
               <img
-                src="https://i.ibb.co.com/3ySnHjhQ/100.png"
+                src="https://i.ibb.co.com/jvYsYCRD/100-add-logo.png"
                 className={logoImageClass} // Clear, large logo
-                alt="NexaCode Studio Flux Logo"
-              />
+                alt="Vexio Web Creations " />
             </span>
           </a>
 

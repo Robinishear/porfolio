@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   FaBriefcase, FaArrowRight, FaEnvelope, FaLinkedinIn, 
-  FaGithub, FaJs, FaPython, FaDownload, FaBookOpen, FaPlus
+  FaGithub, FaJs, FaPython, FaDownload, FaBookOpen, FaPlus,
+  FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp, FaGlobe,
+  FaYoutube, FaDiscord, FaTelegramPlane, FaCode, FaLaptopCode, FaRocket
 } from "react-icons/fa";
 import { SiTypescript, SiGo, SiNextdotjs, SiTailwindcss, SiFramer } from "react-icons/si";
 
@@ -19,6 +21,27 @@ const ProfessionalProfile = () => {
     { icon: <SiTailwindcss />, name: "Tailwind", color: "text-sky-300" },
     { icon: <FaPython />, name: "Python", color: "text-blue-500" },
     { icon: <SiFramer />, name: "Framer", color: "text-pink-500" },
+  ];
+
+  // আপনার ১৬টি বাটনের লিস্ট
+  const menuButtons = [
+    { icon: <FaDownload />, label: "CV" },
+    { icon: <FaDownload />, label: "Rsumi" },
+    // { icon: <FaBookOpen />, label: "RESUME" },
+    // { icon: <FaGithub />, label: "GITHUB" },
+    // { icon: <FaLinkedinIn />, label: "LINKEDIN" },
+    // { icon: <FaFacebookF />, label: "FACEBOOK" },
+    // { icon: <FaInstagram />, label: "INSTA" },
+    // { icon: <FaTwitter />, label: "TWITTER" },
+    // { icon: <FaWhatsapp />, label: "WHATSAPP" },
+    // { icon: <FaEnvelope />, label: "EMAIL" },
+    // { icon: <FaGlobe />, label: "WEB" },
+    // { icon: <FaYoutube />, label: "YOUTUBE" },
+    // { icon: <FaDiscord />, label: "DISCORD" },
+    // { icon: <FaTelegramPlane />, label: "TELEGRAM" },
+    // { icon: <FaCode />, label: "CODE" },
+    // { icon: <FaLaptopCode />, label: "HIRE" },
+    // { icon: <FaRocket />, label: "LAUNCH" },
   ];
 
   return (
@@ -56,7 +79,7 @@ const ProfessionalProfile = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-[15vw] leading-[0.75] font-black tracking-tighter uppercase italic mb-8"
             >
-            M&apos;R<span className="text-outline-thin text-transparent">ROBIN</span>
+              M&apos;R<span className="text-outline-thin text-transparent">ROBIN</span>
             </motion.h1>
 
             <motion.p 
@@ -70,7 +93,7 @@ const ProfessionalProfile = () => {
 
             {/* --- UNIQUE EXPANDABLE BUTTON SYSTEM --- */}
             <div className="flex flex-col items-center gap-4 relative">
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
                 <button className="px-8 py-4 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform">
                   CONTACTE
                 </button>
@@ -78,26 +101,28 @@ const ProfessionalProfile = () => {
                 <div className="relative">
                   <motion.button 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${isMenuOpen ? 'bg-cyan-500 rotate-45' : 'bg-white/10 border border-white/20 hover:bg-white/20'}`}
+                    className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 relative z-[110] ${isMenuOpen ? 'bg-cyan-500 rotate-45' : 'bg-white/10 border border-white/20 hover:bg-white/20'}`}
                   >
-                    <FaPlus className="text-xl" />
+                    <FaPlus className="text-2xl" />
                   </motion.button>
 
-                  {/* Expandable Menu */}
+                  {/* Expandable Menu - 16 Buttons Grid */}
                   <AnimatePresence>
                     {isMenuOpen && (
                       <motion.div 
-                        initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                        animate={{ opacity: 1, x: 70, scale: 1 }}
-                        exit={{ opacity: 0, x: 20, scale: 0.8 }}
-                        className="absolute top-0 left-0 flex gap-3 pointer-events-auto"
+                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                        animate={{ opacity: 1, scale: 1, x: 60 }}
+                        exit={{ opacity: 0, scale: 0.8, x: 20 }}
+                        className="absolute top-[-100px] left-0 md:top-[-150px] bg-zinc-900 border border-white/10 p-4 rounded-[2rem] shadow-2xl backdrop-blur-2xl z-[100] w-[280px] sm:w-[320px]"
                       >
-                        <button className="whitespace-nowrap flex items-center gap-3 px-6 py-4 bg-cyan-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 transition-all shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                          <FaDownload /> DAOWNLODE CV
-                        </button>
-                        <button className="whitespace-nowrap flex items-center gap-3 px-6 py-4 bg-slate-800 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition-all">
-                          <FaBookOpen /> DOWNLODE RESUMI 
-                        </button>
+                        <div className="grid grid-cols-4 gap-2">
+                          {menuButtons.map((btn, i) => (
+                            <button key={i} className="flex flex-col items-center justify-center gap-1 h-16 w-full bg-white/5 rounded-xl hover:bg-cyan-500/20 transition-all border border-white/5">
+                              <span className="text-lg text-cyan-400">{btn.icon}</span>
+                              <span className="text-[6px] font-bold text-white/50">{btn.label}</span>
+                            </button>
+                          ))}
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -134,10 +159,9 @@ const ProfessionalProfile = () => {
                    </div>
                    <h3 className="text-4xl md:text-6xl font-black italic tracking-tighter mb-6 uppercase">System <br/> Architect</h3>
                    <p className="text-slate-400 text-lg leading-relaxed max-w-md font-light">
-                      আমি কোড দিয়ে গল্প বলি। হাই-পারফরম্যান্স স্কেলেবল সিস্টেম থেকে শুরু করে পিক্সেল-পারফেক্ট ফ্রন্টএন্ড ডিজাইন—সবই আমার সিগনেচার স্টাইল।
+                      আমি কোড দিয়ে গল্প বলি। হাই-পারফরম্যান্স স্কেলেবল সিস্টেম থেকে শুরু করে পিক্সেল-পারফেক্ট ফ্রন্টএন্ড ডিজাইন—সবই আমার সিগনেচার স্টাইল।
                    </p>
                 </div>
-                {/* Visual element */}
                 <div className="absolute top-10 right-10 opacity-5 group-hover:opacity-10 transition-opacity">
                    <FaJs className="text-[15rem]" />
                 </div>
@@ -153,7 +177,6 @@ const ProfessionalProfile = () => {
                     <FaArrowRight className="-rotate-45" />
                   </div>
                </div>
-               {/* Animated Circle */}
                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
             </div>
           </div>
@@ -168,24 +191,44 @@ const ProfessionalProfile = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
              <ProjectCard 
-                name="Astro Dashboard" 
-                category="Full Stack Application" 
+                name="" 
+                category="" 
                 image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426" 
              />
              <ProjectCard 
-                name="Titan Commerce" 
-                category="E-commerce Engine" 
+                name="" 
+                category="" 
                 image="https://i.ibb.co.com/67PDKBpy/showing-cart-trolley-shopping-online-sign-graphic.jpg" 
              />
              <ProjectCard 
                 name="" 
                 category="" 
-                image="https://i.ibb.co.com/V0S1bwFy/ray-so-export.png" 
+                image="https://i.ibb.co.com/sTZG1Hh/carbon.png" 
              />
              <ProjectCard 
                 name="" 
                 category="" 
                 image="https://i.ibb.co.com/V0S1bwFy/ray-so-export.png" 
+             />
+             <ProjectCard 
+                name="" 
+                category="" 
+                image="https://i.ibb.co.com/zWpqNGKS/ray-so-export-1.png" 
+             />
+             <ProjectCard 
+                name="" 
+                category="" 
+                image="https://i.ibb.co.com/Jw9FFnNc/Gemini-Generated-Image-2kdz6u2kdz6u2kdz.png" 
+             />
+             <ProjectCard 
+                name="" 
+                category="" 
+                image="https://i.ibb.co.com/P37pDt5/Gemini-Generated-Image-qcnl4wqcnl4wqcnl.png" 
+             />
+             <ProjectCard 
+                name="" 
+                category="" 
+                image="https://i.ibb.co.com/rGvYRsD9/Gemini-Generated-Image-t2587it2587it258.png" 
              />
           </div>
         </section>

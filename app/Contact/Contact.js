@@ -63,7 +63,7 @@ const Contact = () => {
             <h3 className="text-xs font-black uppercase tracking-[0.5em] text-slate-500 mb-6 ml-2 italic">Connect via</h3>
             
             <MagneticCard 
-              link="https://wa.me/yournumber" 
+              link="https://wa.me/8801334757898" 
               icon={<FaWhatsapp />} 
               title="WhatsApp" 
               value="Quick Response" 
@@ -77,7 +77,7 @@ const Contact = () => {
               color="text-blue-400" 
             />
             <MagneticCard 
-              link="mdrobinahmed57898@gmail.com" 
+              link="https://mail.google.com/mail/?view=cm&fs=1&to=mdrobinahmed57898@gmail.com" 
               icon={<FaEnvelope />} 
               title="Email" 
               value="mdrobinahmed57898@gmail.com" 

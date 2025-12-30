@@ -80,7 +80,7 @@ const Contact = () => {
               link="mdrobinahmed57898@gmail.com" 
               icon={<FaEnvelope />} 
               title="Email" 
-              value="hello@robin.com" 
+              value="mdrobinahmed57898@gmail.com" 
               color="text-cyan-400" 
             />
 

@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Floating Animation Global Style */}
+      {/* Floating Animation Global Style ok*/}
       <style jsx global>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }

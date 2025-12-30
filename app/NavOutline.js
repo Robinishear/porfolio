@@ -51,7 +51,7 @@ const NavOutline = () => {
             <Link href="/" className="block">
               <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-2xl group-hover:border-cyan-500/50 transition-all shadow-xl">
                 <img src="https://i.ibb.co.com/N6tM0LQJ/robiniamge.png" className="h-10 sm:h-12 w-auto object-contain" alt="Logo" />
-                <span className="hidden md:block font-bold text-white tracking-widest text-sm italic uppercase">Mr Robin Ahmed</span>
+                <span className="hidden md:block font-bold text-blue-400 tracking-widest text-sm italic uppercase">Mr Robin Ahmed</span>
               </div>
             </Link>
 

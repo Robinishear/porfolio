@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   FaBriefcase, FaArrowRight, FaEnvelope, FaLinkedinIn, 
-  FaGithub, FaJs, FaPython, FaDownload, FaBookOpen, FaPlus,
-  FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp, FaGlobe,
-  FaYoutube, FaDiscord, FaTelegramPlane, FaCode, FaLaptopCode, FaRocket
+  FaGithub, FaJs, FaPython,
 } from "react-icons/fa";
 import { SiTypescript, SiGo, SiNextdotjs, SiTailwindcss, SiFramer } from "react-icons/si";
 
@@ -23,29 +21,10 @@ const ProfessionalProfile = () => {
     { icon: <SiFramer />, name: "Framer", color: "text-pink-500" },
   ];
 
-  // আপনার ১৬টি বাটনের লিস্ট
-  const menuButtons = [
-    { icon: <FaDownload />, label: "CV" },
-    { icon: <FaDownload />, label: "Rsumi" },
-    // { icon: <FaBookOpen />, label: "RESUME" },
-    // { icon: <FaGithub />, label: "GITHUB" },
-    // { icon: <FaLinkedinIn />, label: "LINKEDIN" },
-    // { icon: <FaFacebookF />, label: "FACEBOOK" },
-    // { icon: <FaInstagram />, label: "INSTA" },
-    // { icon: <FaTwitter />, label: "TWITTER" },
-    // { icon: <FaWhatsapp />, label: "WHATSAPP" },
-    // { icon: <FaEnvelope />, label: "EMAIL" },
-    // { icon: <FaGlobe />, label: "WEB" },
-    // { icon: <FaYoutube />, label: "YOUTUBE" },
-    // { icon: <FaDiscord />, label: "DISCORD" },
-    // { icon: <FaTelegramPlane />, label: "TELEGRAM" },
-    // { icon: <FaCode />, label: "CODE" },
-    // { icon: <FaLaptopCode />, label: "HIRE" },
-    // { icon: <FaRocket />, label: "LAUNCH" },
-  ];
+ 
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden relative">
+    <div className="min-h-screen  text-white font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden relative">
       
       {/* --- Noise Texture Overlay --- */}
       <div className="fixed inset-0 z-[99] opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
@@ -92,43 +71,7 @@ const ProfessionalProfile = () => {
             </motion.p>
 
             {/* --- UNIQUE EXPANDABLE BUTTON SYSTEM --- */}
-            <div className="flex flex-col items-center gap-4 relative">
-              <div className="flex gap-4 items-center">
-                <button className="px-8 py-4 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform">
-                  CONTACTE
-                </button>
-
-                <div className="relative">
-                  <motion.button 
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 relative z-[110] ${isMenuOpen ? 'bg-cyan-500 rotate-45' : 'bg-white/10 border border-white/20 hover:bg-white/20'}`}
-                  >
-                    <FaPlus className="text-2xl" />
-                  </motion.button>
-
-                  {/* Expandable Menu - 16 Buttons Grid */}
-                  <AnimatePresence>
-                    {isMenuOpen && (
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                        animate={{ opacity: 1, scale: 1, x: 60 }}
-                        exit={{ opacity: 0, scale: 0.8, x: 20 }}
-                        className="absolute top-[-100px] left-0 md:top-[-150px] bg-zinc-900 border border-white/10 p-4 rounded-[2rem] shadow-2xl backdrop-blur-2xl z-[100] w-[280px] sm:w-[320px]"
-                      >
-                        <div className="grid grid-cols-4 gap-2">
-                          {menuButtons.map((btn, i) => (
-                            <button key={i} className="flex flex-col items-center justify-center gap-1 h-16 w-full bg-white/5 rounded-xl hover:bg-cyan-500/20 transition-all border border-white/5">
-                              <span className="text-lg text-cyan-400">{btn.icon}</span>
-                              <span className="text-[6px] font-bold text-white/50">{btn.label}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
+        
           </div>
         </section>
 
@@ -152,7 +95,7 @@ const ProfessionalProfile = () => {
         {/* --- Bento Section with Depth --- */}
         <section className="max-w-7xl mx-auto px-6 py-40">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-7 group relative bg-gradient-to-br from-[#111] to-[#080808] p-12 rounded-[2.5rem] border border-white/5 overflow-hidden">
+            <div className="md:col-span-7 group relative bg-white/5 p-12 rounded-[2.5rem] border border-white/5 overflow-hidden">
                 <div className="relative z-10">
                    <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-8 border border-cyan-500/20">
                       <FaBriefcase className="text-cyan-500" />
@@ -167,7 +110,7 @@ const ProfessionalProfile = () => {
                 </div>
             </div>
 
-            <div className="md:col-span-5 bg-cyan-600 p-12 rounded-[2.5rem] flex flex-col justify-between group cursor-pointer overflow-hidden relative">
+            {/* <div className="md:col-span-5 bg-cyan-600 p-12 rounded-[2.5rem] flex flex-col justify-between group cursor-pointer overflow-hidden relative">
                <div className="relative z-10">
                  <h3 className="text-3xl font-black uppercase italic leading-none">Let&apos;s build <br/> something <br/> iconic.</h3>
                </div>
@@ -178,7 +121,7 @@ const ProfessionalProfile = () => {
                   </div>
                </div>
                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
-            </div>
+            </div> */}
           </div>
         </section>
 
@@ -263,9 +206,9 @@ const ProjectCard = ({ name, category, image }) => (
     className="group cursor-none"
   >
     <div className="relative aspect-video overflow-hidden rounded-[2rem] border border-white/10 mb-6">
-      <img src={image} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-[1s]" />
+      <img src={image} alt={name} className="w-full h-full object-cover  group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-[1s]" />
       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        <div className="px-6 py-3 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest scale-75 group-hover:scale-100 transition-transform">View Case Study</div>
+        <div className="px-6 py-3  text-black rounded-full font-bold text-xs uppercase tracking-widest scale-75 group-hover:scale-100 transition-transform">View Case Study</div>
       </div>
     </div>
     <h3 className="text-2xl font-black uppercase italic tracking-tighter mb-1">{name}</h3>

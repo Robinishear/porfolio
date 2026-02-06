@@ -94,7 +94,7 @@ const ServiceCard = ({ service, index }) => {
 
 export default function PortfolioServices() {
   return (
-    <section className="relative min-h-screen w-full bg-[#050505] py-32 px-6 overflow-hidden flex flex-col items-center">
+    <section className="relative min-h-screen w-full  py-32 px-6 overflow-hidden flex flex-col items-center">
       
       {/* --- BACKGROUND AURORA --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">

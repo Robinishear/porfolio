@@ -122,33 +122,35 @@ const NavOutline = () => {
         <div className="flex justify-between items-center h-20">
           {/* --- LOGO WITH HOVER MODAL --- */}
           <div className="relative group">
-            <Link href="/" className="block">
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-2xl group-hover:border-cyan-500/50 transition-all shadow-xl">
-                <div className="p-[2px] rounded-2xl bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 inline-block">
-                  <img
-                    src="https://i.ibb.co.com/zV4B3cSR/add.png"
-                    className="h-10 sm:h-12 rounded-2xl w-auto object-contain bg-white"
-                    alt="Logo"
-                  />
-                </div>{" "}
-                <span className="hidden md:block font-bold tracking-widest text-sm italic uppercase">
-                  <span className="text-red-500">M</span>
-                  <span className="text-yellow-500">r</span>
-                  <span className="text-green-500"> </span>
-                  <span className="text-blue-500">R</span>
-                  <span className="text-purple-500">o</span>
-                  <span className="text-pink-500">b</span>
-                  <span className="text-red-500">i</span>
-                  <span className="text-yellow-500">n</span>
-                  <span className="text-green-500"> </span>
-                  <span className="text-blue-500">A</span>
-                  <span className="text-purple-500">h</span>
-                  <span className="text-pink-500">m</span>
-                  <span className="text-red-500">e</span>
-                  <span className="text-yellow-500">d</span>
-                </span>
-              </div>
-            </Link>
+          <Link href="/" className="block group">
+  <div className="flex items-center gap-4 bg-white/[0.03] backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-2xl group-hover:border-sky-500/50 transition-all duration-500 shadow-2xl hover:shadow-sky-500/10">
+    
+    {/* --- Logo Image with Neon Glow --- */}
+    <div className="relative">
+      <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
+      <div className="relative p-[1.5px] rounded-2xl bg-gradient-to-br from-white/20 to-transparent">
+        <img
+          src="https://i.ibb.co.com/zV4B3cSR/add.png"
+          className="h-10 sm:h-11 rounded-[14px] w-auto object-contain bg-[#0B0F1A] p-1"
+          alt="Logo"
+        />
+      </div>
+    </div>
+
+    {/* --- Modern Gradient Text --- */}
+    <div className="hidden md:flex flex-col">
+      <span className="font-black tracking-[0.2em] text-sm uppercase leading-none">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-400 group-hover:from-sky-400 group-hover:to-purple-400 transition-all duration-500">
+          Mr Robin
+        </span>
+      </span>
+      <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-sky-500/60 group-hover:text-sky-400 transition-colors duration-500">
+        Ahmed
+      </span>
+    </div>
+
+  </div>
+</Link>
 
             {/* Logo Hover Modal (Desktop) */}
             <div className="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 translate-y-4 group-hover:translate-y-0 z-[110]">
@@ -167,7 +169,7 @@ const NavOutline = () => {
                     </span>
                   </a>
                   <a
-                    href="#"
+                    href="https://docs.google.com/document/d/1A1wSKuTCIJhsBVNDR4o1FHMBdye6mYnoQfQkynP2xso/edit?usp=sharing"
                     className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all group/item"
                   >
                     <FaFileAlt className="text-blue-500 group-hover/item:scale-110 transition-transform" />

@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaArrowUp } from "re
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#0b0f1a] pt-20 pb-10 overflow-hidden font-sans">
+    <footer className="relative bg-white/5 pt-20 pb-10 overflow-hidden font-sans">
       {/* 1. Neon Top Divider (Image-er moto) */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60"></div>
 

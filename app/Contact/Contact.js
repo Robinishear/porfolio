@@ -25,7 +25,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#020202] py-28 px-6 relative overflow-hidden text-white" id="contact">
+    <section className="min-h-screen  py-28 px-6 relative overflow-hidden text-white" id="contact">
       
       {/* --- Cinematic Background Glows --- */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none animate-pulse" />
@@ -101,9 +101,9 @@ const Contact = () => {
           <motion.div 
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="lg:col-span-7 bg-[#080808] border border-white/5 rounded-[3.5rem] p-8 md:p-14 shadow-2xl relative group"
+            className="lg:col-span-7  border border-white/5 rounded-[3.5rem] p-8 md:p-14 shadow-2xl relative group"
           >
-            <div className="absolute -inset-[1px] bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-[3.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute -inset-[1px]  rounded-[3.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <form onSubmit={handleSubmit} className="space-y-10 relative z-10 text-left">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

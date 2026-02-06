@@ -1,10 +1,14 @@
 import React from "react";
 import ProfessionalProfile from "./ProfessionalProfile";
+import DesignSection from "@/components/design/DesignSection";
 
 const page = () => {
   return (
     <div>
-      <ProfessionalProfile></ProfessionalProfile>
+      <DesignSection>
+              <ProfessionalProfile></ProfessionalProfile>
+
+      </DesignSection>
     </div>
   );
 };

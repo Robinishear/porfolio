@@ -86,7 +86,7 @@ export default function About() {
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-7xl md:text-9xl font-black mb-8 leading-[0.8] tracking-tighter"
+            className="text-7xl md:text-8xl flex font-black mb-8 leading-[0.8] tracking-tighter"
           >
             FULL <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-purple-500 to-pink-500 animate-gradient-x">STACK</span><br />
             <span className="italic">VISIONARY</span>
@@ -96,7 +96,7 @@ export default function About() {
             {...fadeInUp}
             className="max-w-2xl mx-auto text-gray-400 text-xl mb-12"
           >
-            Express.js, Next.js এবং আধুনিক ডাটাবেস সলিউশন দিয়ে আমি আপনার আইডিয়াকে বাস্তবে রূপান্তর করি।
+            Express.js, Next.js And with modern database solutions, I turn your ideas into reality.
           </motion.p>
 
           <motion.div 
@@ -155,8 +155,7 @@ export default function About() {
             <div className="space-y-8">
               <h2 className="text-6xl font-black leading-none">CRAFTING <br/> <span className="text-pink-500">LEGENDS.</span></h2>
               <p className="text-gray-400 text-lg">
-                আমি শুধু ওয়েবসাইট বানাই না, আমি ডিজিটাল অভিজ্ঞতা তৈরি করি যা ইউজারদের মনে গেঁথে থাকে। Express.js ব্যাকএন্ড থেকে শুরু করে Next.js ফ্রন্টএন্ড—সবখানেই আমি পারফেকশন খুঁজি।
-              </p>
+I don't just build websites, I create digital experiences that resonate with users. From the Express.js backend to the Next.js frontend—I strive for perfection everywhere.              </p>
               <div className="flex gap-4 bg-white/5">
                 {/* <div className="h-1 w-20 bg-sky-500"></div>
                 <div className="h-1 w-20 bg-purple-500"></div>

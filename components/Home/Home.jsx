@@ -2,7 +2,6 @@
 
 import React from "react";
 import Head from "next/head";
-import Contact from "@/app/Contact/Contact";
 
 // --- Shimmer Card Component ---
 const AnimatedCard = ({ children }) => {
@@ -99,7 +98,6 @@ My system automatically handles the complex and time-consuming tasks, so you can
             </AnimatedCard>
         </section>
 
-      <Contact></Contact>
       </div>
     </>
   );

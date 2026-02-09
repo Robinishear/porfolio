@@ -107,79 +107,101 @@ const MyPortfolio = () => {
           ))}
         </div>
 
-        {/* --- High-End Animated Modal --- */}
-        {isModalOpen && selectedProject && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Overlay */}
-            <div
-              className="absolute inset-0 bg-black/90 backdrop-blur-md animate-in fade-in duration-500"
-              onClick={closeModal}
-            ></div>
 
-            {/* Modal Box */}
-            <div className="bg-[#0f172a] w-full max-w-2xl rounded-[2.5rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] relative flex flex-col max-h-[85vh] overflow-hidden border border-white/10 animate-in slide-in-from-bottom-10 zoom-in-95 duration-500 ease-out">
-              <div className="relative h-64 flex-shrink-0">
-                <img
-                  src={selectedProject.image_url}
-                  className="w-full h-full object-cover"
-                  alt="Banner"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0f172a]"></div>
-                <button
-                  onClick={closeModal}
-                  className="absolute top-6 right-6 bg-black/50 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-500 hover:rotate-90 transition-all duration-300"
+
+
+{/* --- Ultra-Modern Professional Modal --- */}
+
+{/* --- Ultra-Premium Modal with Side-by-Side Buttons --- */}
+{isModalOpen && selectedProject && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6">
+    {/* Cinematic Overlay */}
+    <div
+      className="absolute inset-0 bg-[#020617]/98 backdrop-blur-2xl animate-in fade-in duration-700"
+      onClick={closeModal}
+    ></div>
+
+    {/* Main Modal Card */}
+    <div className="bg-[#0f172a] w-full max-w-5xl rounded-none md:rounded-[3rem] shadow-2xl relative flex flex-col md:flex-row max-h-screen md:max-h-[85vh] overflow-hidden border-0 md:border border-white/10 animate-in zoom-in-95 duration-500">
+      
+      {/* 1. Image Section */}
+      <div className="md:w-[45%] relative h-[250px] md:h-auto overflow-hidden">
+        <img
+          src={selectedProject.image_url}
+          className="w-full h-full object-cover animate-in fade-in zoom-in-110 duration-1000"
+          alt="Project"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+      </div>
+
+      {/* 2. Content Section */}
+      <div className="md:w-[55%] flex flex-col p-8 md:p-14 overflow-y-auto custom-scrollbar relative">
+        
+        {/* Small Label */}
+        <p className="text-blue-500 font-bold text-[10px] uppercase tracking-[0.5em] mb-4 animate-in fade-in slide-in-from-bottom-2 duration-700 delay-150">
+          Project Showcase
+        </p>
+
+        {/* Title Animation */}
+        <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+          {selectedProject.title}
+        </h2>
+
+        {/* Description & Tech Stack */}
+        <div className="space-y-10 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500">
+          <section className="relative pl-6 border-l-2 border-blue-500/30">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Overview</h3>
+            <p className="text-slate-300 text-lg leading-relaxed font-light italic">
+              "{selectedProject.description}"
+            </p>
+          </section>
+
+          <section className="animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Technologies Used</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {selectedProject.features?.map((feat, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-blue-500/30 transition-all group"
                 >
-                  ✕
-                </button>
-              </div>
-
-              <div className="p-8 overflow-y-auto custom-scrollbar">
-                <h2 className="text-4xl font-black text-white mb-6 tracking-tight animate-in fade-in slide-in-from-left duration-700 delay-200">
-                  {selectedProject.title}
-                </h2>
-
-                <div className="mb-10 space-y-4 animate-in fade-in duration-1000 delay-300">
-                  <span className="text-blue-500 font-bold text-xs uppercase tracking-[0.2em]">
-                    About Project
-                  </span>
-                  <p className="text-slate-300 leading-relaxed text-base font-light">
-                    {selectedProject.description}
-                  </p>
+                  <p className="text-[9px] text-blue-500 font-black uppercase mb-1 tracking-tighter">{feat.label}</p>
+                  <p className="text-white font-medium text-sm">{feat.value}</p>
                 </div>
-
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-400">
-                  <span className="text-emerald-500 py-5 font-bold text-xs uppercase tracking-[0.2em]">
-                    **“Which technologies have been used in the project”**
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {selectedProject.features?.map((feat, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors group"
-                      >
-                        <span className="text-[10px] font-bold text-slate-500 uppercase mb-1">
-                          {feat.label}
-                        </span>
-                        <span className="text-white font-semibold group-hover:text-blue-400 transition-colors">
-                          {feat.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 bg-black/20 border-t border-white/5 flex-shrink-0">
-                <button
-                  onClick={closeModal}
-                  className="w-full bg-blue-600 text-white py-4 rounded-xl font-black hover:bg-blue-500 transition-all duration-300 uppercase tracking-widest text-xs"
-                >
-                  Return to Gallery
-                </button>
-              </div>
+              ))}
             </div>
-          </div>
-        )}
+          </section>
+        </div>
+
+        {/* --- Multi-Button Footer --- */}
+        <footer className="mt-12 flex flex-col sm:flex-row items-center gap-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1000">
+          {/* Live Preview Button */}
+          <a
+            href={selectedProject.external_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:flex-1 px-8 py-5 bg-white text-black text-[12px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-500 text-center shadow-lg active:scale-95"
+          >
+            Live Preview 🚀
+          </a>
+
+          {/* Close Button Beside Live Preview */}
+          <button
+            onClick={closeModal}
+            className="w-full sm:w-auto px-8 py-5 bg-white/5 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-2xl border border-white/10 hover:bg-red-500/10 hover:border-red-500/50 transition-all duration-500 active:scale-95"
+          >
+            Close Project
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
       </div>
 
       <style jsx global>{`

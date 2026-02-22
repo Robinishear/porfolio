@@ -4,6 +4,8 @@ import React from "react";
 import About from "./About/About";
 import Contact from "./Contact/Contact";
 import MyPortfolio from "./MyPortfolio/MyPortfolio";
+import ServiceCard from './Services/ServiceCard';
+
 
 const page = () => {
   return (
@@ -14,6 +16,7 @@ const page = () => {
         <About></About>
         <MyPortfolio></MyPortfolio>
         <Contact></Contact>
+        <ServiceCard></ServiceCard>
       </DesignSection>
     </div>
   );

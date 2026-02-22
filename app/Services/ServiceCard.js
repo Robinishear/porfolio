@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -120,7 +121,7 @@ export default function PortfolioServices() {
             MY <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">EXPERTISE.</span>
           </h2>
           <p className="text-gray-500 text-xl max-w-2xl mx-auto font-medium">
-            আমি শুধুমাত্র কোড লিখি না, আমি ডিজিটাল লিগ্যাসি তৈরি করি। প্রতিটি পিক্সেল এবং প্রতিটি লজিক নিখুঁতভাবে ডিজাইন করা।
+            I don't just write code, I create digital legacies. Every pixel and every logic is designed to perfection.
           </p>
         </div>
 

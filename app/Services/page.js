@@ -1,13 +1,13 @@
 "use client";
 
 import React from 'react';
-import PortfolioServices from './PortfolioServices';
+import ServiceCard from './ServiceCard';
 import DesignSection from '@/components/design/DesignSection';
 
 const page = () => {
     return (
         <div>
-            <DesignSection>            <PortfolioServices></PortfolioServices>
+            <DesignSection>            <ServiceCard></ServiceCard>
 </DesignSection>
         </div>
     );

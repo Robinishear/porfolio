@@ -47,23 +47,31 @@ const RocketItem = ({ id, onExplode }) => {
         </div>
       ) : (
         <div className="flex flex-col items-center group relative">
-          <div className="text-4xl font-bold transition-transform group-hover:scale-110 drop-shadow-[0_0_20px_rgba(163,230,53,0.9)]">
-            Robin
+          <div className="relative">
+            <div className="text-2xl md:text-2xl font-black tracking-widest transition-all duration-500 group-hover:scale-125 group-hover:rotate-1">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00f2fe] via-[#a3e635] via-[#facc15] to-[#ff0080] animate-gradient-x drop-shadow-[0_0_15px_rgba(0,242,254,0.8)]">
+                ⫷M̺R̺ 𝚁̷𝚘̷𝚋̷𝚒̷𝚗̷ A͆h͆m͆e͆d͆⫸
+              </span>
+
+              <div className="absolute inset-0 blur-lg opacity-40 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-cyan-400 via-lime-400 to-yellow-400 -z-10"></div>
+            </div>
           </div>
-          <div className="absolute top-10 w-28 h-28 bg-lime-500/40 blur-[40px] rounded-full -z-10 animate-pulse"></div>
+
+          <div className="absolute top-0 w-40 h-16 bg-gradient-to-r from-cyan-500/20 to-lime-500/20 blur-[60px] rounded-full -z-10 animate-pulse"></div>
+
           <motion.div
             animate={{
-              height: [30, 70, 30],
+              height: [40, 90, 40],
               opacity: [0.7, 1, 0.7],
-              scaleX: [1, 2, 1],
+              scaleX: [1, 2.5, 1],
               filter: [
-                "blur(1px) brightness(1)",
-                "blur(2px) brightness(2)",
-                "blur(1px) brightness(1)",
+                "blur(2px) brightness(1.2)",
+                "blur(4px) brightness(2)",
+                "blur(2px) brightness(1.2)",
               ],
             }}
-            transition={{ repeat: Infinity, duration: 0.15, ease: "easeInOut" }}
-            className="w-3 bg-gradient-to-t from-transparent via-[#3a5dce] to-yellow-300 rounded-full mt-[-5px] shadow-[0_0_25px_#a3e635, 0_0_50px_#facc15]"
+            transition={{ repeat: Infinity, duration: 0.12, ease: "easeInOut" }}
+            className="w-4 bg-gradient-to-t from-transparent via-[#00f2fe] via-[#a3e635] to-[#facc15] rounded-full mt-2 shadow-[0_0_30px_#a3e635, 0_0_60px_#00f2fe]"
           />
         </div>
       )}
@@ -78,8 +86,8 @@ const DesignSection = ({ children }) => {
   const mouseY = useMotionValue(0);
   const [rockets, setRockets] = useState([]);
 
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 16 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 16 });
+  const smoothX = useSpring(mouseX, { stiffness: 1000, damping: 50, mass: 1 });
+  const smoothY = useSpring(mouseY, { stiffness: 1000, damping: 50, mass: 1 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -112,7 +120,7 @@ const DesignSection = ({ children }) => {
     <section
       ref={sectionRef}
       className="relative w-full min-h-screen bg-[#01030a] overflow-hidden select-none text-white"
-      style={{ cursor: "auto" }} 
+      style={{ cursor: "auto" }}
     >
       {/* --- Background Effects --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -143,14 +151,14 @@ const DesignSection = ({ children }) => {
         </AnimatePresence>
       </div>
 
-      {/* --- 🖱️ ADVANCED CYBER CURSOR (Visible with default mouse) --- */}
+      {/* --- 🖱️ ADVANCED CYBER CURSOR --- */}
       <motion.div
         className="fixed top-0 left-0 z-[100] pointer-events-none hidden lg:flex flex-col items-center justify-center"
         style={{
           x: smoothX,
           y: smoothY,
-          translateX: "-50%",
-          translateY: "-50%",
+          translateX: "-3%",
+          translateY: "-3%",
         }}
       >
         <div className="relative flex items-center justify-center w-24 h-24">
@@ -162,7 +170,8 @@ const DesignSection = ({ children }) => {
             style={{
               borderStyle: "double",
               borderWidth: "2px",
-              maskImage: "conic-gradient(from 0deg, black, transparent 70%, black)",
+              maskImage:
+                "conic-gradient(from 0deg, black, transparent 70%, black)",
             }}
           />
 
@@ -175,20 +184,20 @@ const DesignSection = ({ children }) => {
 
           {/* Center Point */}
           <div className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_8px_#fff]"></div>
-          
+
           {/* Corner Brackets */}
           <div className="absolute -inset-1 border-t-2 border-l-2 border-cyan-400/50 w-3 h-3 top-0 left-0"></div>
           <div className="absolute -inset-1 border-b-2 border-r-2 border-cyan-400/50 w-3 h-3 bottom-0 right-0"></div>
         </div>
 
         {/* Tail Flame Effect */}
-        <div className="flex flex-col items-center mt-1">
+        {/* <div className="flex flex-col items-center mt-1">
           <motion.div
             animate={{ height: [10, 30, 10], opacity: [0.3, 0.8, 0.3] }}
             transition={{ repeat: Infinity, duration: 0.3 }}
             className="w-1.5 bg-cyan-400 blur-[2px] rounded-full shadow-[0_0_12px_#22d3ee]"
           />
-        </div>
+        </div> */}
       </motion.div>
 
       {/* --- Content Container --- */}
@@ -210,7 +219,8 @@ const DesignSection = ({ children }) => {
           margin: 0;
           overflow-x: hidden;
         }
-        a, button {
+        a,
+        button {
           cursor: pointer !important;
         }
       `}</style>

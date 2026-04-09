@@ -5,8 +5,8 @@ import React from "react";
 // --- Shimmer Card Component ---
 const AnimatedCard = ({ children }) => {
     return (
-        <div className="relative p-[1px] bg-white/3 rounded-xl overflow-hidden transition-all duration-500">
-            <div className="absolute inset-0 bg-gradient-to-r bg-[length:200%_auto] animate-[shimmer_4s_linear_infinite] opacity-70"></div>
+        <div className="relative p-px bg-white/3 rounded-xl overflow-hidden transition-all duration-500">
+            <div className="absolute inset-0 bg-linear-to-r bg-size-[200%_auto] animate-[shimmer_4s_linear_infinite] opacity-70"></div>
             <div className="relative p-4 md:p-12 rounded-[14px] h-full  backdrop-blur-xl border border-white/5">
                 {children}
             </div>
@@ -14,14 +14,14 @@ const AnimatedCard = ({ children }) => {
     );
 };
 
-// --- Hover-Fill Button Component ---
+// --- Hover-Fill Button Component hi---
 const AnimatedButton = ({ children, className = '', type = "button" }) => {
     return (
         <button 
             type={type}
             className={`group relative overflow-hidden text-[10px] md:text-lg rounded-full py-2.5 md:py-4 px-4 md:px-10 font-bold text-white bg-white/5 border border-white/10 transition-all duration-300 hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] active:scale-95 whitespace-nowrap ${className}`}
         >
-            <span className="absolute inset-0 z-0 bg-gradient-to-r from-cyan-500 to-fuchsia-600 origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100"></span>
+            <span className="absolute inset-0 z-0 bg-linear-to-r from-cyan-500 to-fuchsia-600 origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100"></span>
             <span className="relative z-10">{children}</span>
         </button>
     );
@@ -78,7 +78,7 @@ export default function Home() {
                     </div>
                     
                     <div className="flex-1 relative group w-full">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-lg blur opacity-10"></div>
+                        <div className="absolute -inset-1 bg-linear-to-r from-cyan-500 to-fuchsia-500 rounded-lg blur opacity-10"></div>
                         <img
                             src="https://i.ibb.co.com/zV4B3cSR/add.png"
                             className={`relative rounded-lg w-full h-auto ${CYAN_GLOW}`}
